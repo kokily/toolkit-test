@@ -8,18 +8,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { InputItem } from '.';
+import { Bill } from './Bill';
 import { User } from './User';
-
-type InputItem = {
-  id: string;
-  name: string;
-  divide: string;
-  native: string;
-  unit: string;
-  price: number;
-  count: number;
-  amount: number;
-};
 
 @Entity()
 export class Cart extends BaseEntity {
@@ -49,4 +40,10 @@ export class Cart extends BaseEntity {
 
   @ManyToOne((type) => User, (user) => user.carts)
   user!: User;
+
+  @Column({ nullable: true })
+  bill_id!: string;
+
+  @OneToOne((type) => Bill, (bill) => bill.cart_id)
+  bill!: Bill;
 }

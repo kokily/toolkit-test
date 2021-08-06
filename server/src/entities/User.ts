@@ -10,6 +10,7 @@ import {
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Cart } from './Cart';
+import { Bill } from './Bill';
 
 @Entity()
 export class User extends BaseEntity {
@@ -36,6 +37,9 @@ export class User extends BaseEntity {
   // Relations
   @OneToMany((type) => Cart, (cart) => cart.user_id)
   carts!: [Cart];
+
+  @OneToMany((type) => Bill, (bill) => bill.user_id)
+  bills!: [Bill];
 
   // Methods
   async hashPassword(password: string): Promise<string> {
