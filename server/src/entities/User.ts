@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { Cart } from './Cart';
 
 @Entity()
 export class User extends BaseEntity {
@@ -31,6 +32,10 @@ export class User extends BaseEntity {
   @Column({ type: 'timestamptz' })
   @UpdateDateColumn()
   updated_at!: Date;
+
+  // Relations
+  @OneToMany((type) => Cart, (cart) => cart.user_id)
+  carts!: [Cart];
 
   // Methods
   async hashPassword(password: string): Promise<string> {
