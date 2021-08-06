@@ -1,2 +1,1 @@
-# toolkit-test
-Redux-toolkit test
+# Redux Toolkit
