@@ -49,12 +49,7 @@ export function isAdminIn(ctx: Context, next: Next) {
     return;
   }
 
-  if (
-    user.username !== process.env.ADMIN1 &&
-    user.username !== process.env.ADMIN2 &&
-    user.username !== process.env.ADMIN3 &&
-    user.username !== process.env.ADMIN4
-  ) {
+  if (!user.admin) {
     ctx.status = 403;
     ctx.body = {
       name: 'NOT_PERMISSION',
@@ -63,4 +58,16 @@ export function isAdminIn(ctx: Context, next: Next) {
   }
 
   return next();
+}
+
+export function cleanAllNullArgs(args: object): object {
+  const notNull = {};
+
+  Object.keys(args).forEach((key) => {
+    if (args[key] !== null) {
+      notNull[key] = args[key];
+    }
+  });
+
+  return notNull;
 }
