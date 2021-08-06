@@ -5,6 +5,7 @@ import cartAPI from './cart';
 import usersAPI from './users';
 import billsAPI from './bills';
 import reserveAPI from './reserve';
+import weddingsAPI from './weddings';
 
 const api = new Router();
 
@@ -14,5 +15,6 @@ api.use('/cart', cartAPI.routes());
 api.use('/users', usersAPI.routes());
 api.use('/bills', billsAPI.routes());
 api.use('/reserve', reserveAPI.routes());
+api.use('/weddings', weddingsAPI.routes());
 
 export default api;
