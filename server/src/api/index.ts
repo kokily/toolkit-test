@@ -7,6 +7,7 @@ import billsAPI from './bills';
 import reserveAPI from './reserve';
 import weddingsAPI from './weddings';
 import signAPI from './sign';
+import upload from './upload';
 
 const api = new Router();
 
@@ -18,5 +19,6 @@ api.use('/bills', billsAPI.routes());
 api.use('/reserve', reserveAPI.routes());
 api.use('/weddings', weddingsAPI.routes());
 api.use('/sign', signAPI.routes());
+api.use('/upload', upload.routes());
 
 export default api;
