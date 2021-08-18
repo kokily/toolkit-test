@@ -17,7 +17,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === 'production'
-        ? 'https://paysys.shop'
+        ? 'https://paysys.kr'
         : 'http://localhost:3000',
     credentials: true,
   })

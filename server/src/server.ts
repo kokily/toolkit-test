@@ -23,7 +23,7 @@ const _bootStrap = async () => {
     await createConnection(ConnectionOptions);
 
     const configurations = {
-      production: { ssl: true, port: 443, hostname: 'paysys.shop' },
+      production: { ssl: true, port: 443, hostname: 'paysys.kr' },
       development: { ssl: false, port: 4000, hostname: 'localhost' },
     };
 

@@ -2,7 +2,7 @@ import { Context } from 'koa';
 import { getRepository } from 'typeorm';
 import Joi from 'joi';
 import { User } from '../../entities/User';
-import { validateBody } from '../../libs/utils';
+import { serialize, validateBody } from '../../libs/utils';
 import { setCookie } from '../../libs/auth';
 
 export default async function login(ctx: Context) {
@@ -45,9 +45,7 @@ export default async function login(ctx: Context) {
 
     setCookie(ctx, token);
 
-    ctx.body = {
-      token,
-    };
+    ctx.body = serialize(user);
   } catch (err) {
     ctx.throw(500, err);
   }
