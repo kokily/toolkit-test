@@ -4,6 +4,7 @@ import { AuthResponse } from '../libs/api/auth';
 
 // Auth Routes
 const LoginPage = loadable(() => import('../pages/auth/LoginPage'));
+const RegisterPage = loadable(() => import('../pages/auth/RegisterPage'));
 
 export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
   if (!user) {
@@ -26,6 +27,7 @@ export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
 export const LogoutRoutes = () => (
   <Switch>
     <Route exact path="/" component={LoginPage} />
+    <Route path="/register" component={RegisterPage} />
     <Redirect from="*" to="/" />
   </Switch>
 );

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthResponse, login, me } from '../api/auth';
+import { AuthResponse, login, me, register } from '../api/auth';
 
 export type AuthState = {
   user: AuthResponse | null;
@@ -9,6 +9,9 @@ export type AuthState = {
   meLoading: boolean;
   meSuccess: boolean;
   meError: string | null;
+  registerLoading: boolean;
+  registerSuccess: boolean;
+  registerError: string | null;
 };
 
 const initialState: AuthState = {
@@ -19,6 +22,9 @@ const initialState: AuthState = {
   meLoading: false,
   meSuccess: false,
   meError: null,
+  registerLoading: false,
+  registerSuccess: false,
+  registerError: null,
 };
 
 const authSlice = createSlice({
@@ -61,7 +67,22 @@ const authSlice = createSlice({
       .addCase(me.rejected, (state: AuthState, action: PayloadAction<any>) => {
         state.meLoading = false;
         state.meError = action.payload;
-      }),
+      })
+      .addCase(register.pending, (state: AuthState) => {
+        state.registerLoading = true;
+        state.registerError = null;
+      })
+      .addCase(register.fulfilled, (state: AuthState) => {
+        state.registerLoading = false;
+        state.registerSuccess = true;
+      })
+      .addCase(
+        register.rejected,
+        (state: AuthState, action: PayloadAction<any>) => {
+          state.registerLoading = false;
+          state.registerError = action.payload;
+        }
+      ),
 });
 
 export const { reducer } = authSlice;

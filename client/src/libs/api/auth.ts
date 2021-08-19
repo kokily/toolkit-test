@@ -36,3 +36,16 @@ export const me = createAsyncThunk('auth/me', async () => {
 
   return response.data;
 });
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (data: AuthPayload, { rejectWithValue }) => {
+    try {
+      const response = await axios.post<AuthResponse>('/auth/register', data);
+
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
