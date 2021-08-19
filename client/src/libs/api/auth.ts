@@ -1,11 +1,5 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:4000/api'
-    : 'https://paysys.kr/api';
-axios.defaults.withCredentials = true;
+import client from './client';
 
 export type AuthPayload = {
   username: string;
@@ -22,7 +16,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (data: AuthPayload, { rejectWithValue }) => {
     try {
-      const response = await axios.post<AuthResponse>('/auth/login', data);
+      const response = await client.post<AuthResponse>('/auth/login', data);
 
       localStorage.setItem('paysys_user', JSON.stringify(response.data));
 
@@ -34,7 +28,7 @@ export const login = createAsyncThunk(
 );
 
 export const me = createAsyncThunk('auth/me', async () => {
-  const response = await axios.get<AuthResponse>('/auth/me');
+  const response = await client.get<AuthResponse>('/auth/me');
 
   return response.data;
 });
@@ -43,7 +37,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (data: AuthPayload, { rejectWithValue }) => {
     try {
-      const response = await axios.post<AuthResponse>('/auth/register', data);
+      const response = await client.post<AuthResponse>('/auth/register', data);
 
       return response.data;
     } catch (err) {
@@ -53,7 +47,7 @@ export const register = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-  const response = await axios.post('/auth/logout');
+  const response = await client.post('/auth/logout');
 
   localStorage.removeItem('paysys_user');
 

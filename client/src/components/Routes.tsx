@@ -7,7 +7,7 @@ const LoginPage = loadable(() => import('../pages/auth/LoginPage'));
 const RegisterPage = loadable(() => import('../pages/auth/RegisterPage'));
 
 // Home Routes
-const SoldierPage = loadable(() => import('../pages/home/SoldierPage'));
+const HomePage = loadable(() => import('../pages/home/HomePage'));
 
 export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
   if (!user) {
@@ -20,7 +20,9 @@ export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
       {user && (
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/solider" />} />
-          <Route exact path="/soldier" component={SoldierPage} />
+          <Route exact path="/soldier" component={HomePage} />
+          <Route exact path="/reserve" component={HomePage} />
+          <Route exact path="/general" component={HomePage} />
           <Redirect from="*" to="/soldier" />
         </Switch>
       )}
