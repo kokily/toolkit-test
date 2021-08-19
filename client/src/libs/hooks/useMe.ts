@@ -9,11 +9,11 @@ export default function useMe() {
 
   const checkMe = useCallback(() => {
     dispatch(me());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     checkMe();
-  }, []);
+  }, [checkMe, dispatch]);
 
   return {
     user,

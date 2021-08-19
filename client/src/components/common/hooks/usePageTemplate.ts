@@ -9,7 +9,7 @@ export default function usePageTemplate() {
 
   const onLogout = useCallback(async () => {
     dispatch(logout());
-  }, []);
+  }, [dispatch]);
 
   return { user, onLogout };
 }

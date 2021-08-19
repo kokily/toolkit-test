@@ -38,7 +38,7 @@ export default function useAuth() {
       e.preventDefault();
       reduxDispatch(login({ username, password }));
     },
-    [username, password]
+    [username, password, reduxDispatch]
   );
 
   const onRegister = useCallback(
@@ -57,7 +57,7 @@ export default function useAuth() {
 
       reduxDispatch(register({ username, password }));
     },
-    [username, password]
+    [username, password, passwordConfirm, reduxDispatch]
   );
 
   return {
