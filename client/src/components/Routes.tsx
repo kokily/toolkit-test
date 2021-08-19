@@ -6,6 +6,9 @@ import { AuthResponse } from '../libs/api/auth';
 const LoginPage = loadable(() => import('../pages/auth/LoginPage'));
 const RegisterPage = loadable(() => import('../pages/auth/RegisterPage'));
 
+// Home Routes
+const SoldierPage = loadable(() => import('../pages/home/SoldierPage'));
+
 export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
   if (!user) {
     localStorage.removeItem('paysys_token');
@@ -16,7 +19,8 @@ export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
     <>
       {user && (
         <Switch>
-          <Route exact path="/" />
+          <Route exact path="/" render={() => <Redirect to="/solider" />} />
+          <Route exact path="/soldier" component={SoldierPage} />
           <Redirect from="*" to="/soldier" />
         </Switch>
       )}

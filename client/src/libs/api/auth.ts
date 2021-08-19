@@ -24,6 +24,8 @@ export const login = createAsyncThunk(
     try {
       const response = await axios.post<AuthResponse>('/auth/login', data);
 
+      localStorage.setItem('paysys_user', JSON.stringify(response.data));
+
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -49,3 +51,11 @@ export const register = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  const response = await axios.post('/auth/logout');
+
+  localStorage.removeItem('paysys_user');
+
+  return response.data;
+});
