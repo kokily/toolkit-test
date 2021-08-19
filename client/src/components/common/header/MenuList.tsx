@@ -65,6 +65,10 @@ const MenuList: React.FC<Props> = ({ user, onClose, onLogout, visible }) => {
             <Container onClick={onClose} style={props}>
               <div className="menu-wrapper">
                 <MenuItem to="/password">비밀번호 변경</MenuItem>
+
+                <Split />
+
+                <MenuItem onClick={onLogout}>로그아웃</MenuItem>
               </div>
             </Container>
           </OutsideClickHandler>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { media } from '../../libs/styles';
+import BottomNav from './bottom/BottomNav';
 import Header from './Header';
 import usePageTemplate from './hooks/usePageTemplate';
 
@@ -27,6 +28,7 @@ const PageTemplate: React.FC<Props> = ({ children }) => {
         <>
           <Header user={user} onLogout={onLogout} />
           <Main>{children}</Main>
+          <BottomNav />
         </>
       )}
     </>
