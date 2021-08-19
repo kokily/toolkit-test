@@ -9,6 +9,7 @@ const RegisterPage = loadable(() => import('../pages/auth/RegisterPage'));
 // Home Routes
 const HomePage = loadable(() => import('../pages/home/HomePage'));
 const ListMenuPage = loadable(() => import('../pages/home/ListMenuPage'));
+const AddCartPage = loadable(() => import('../pages/home/AddCartPage'));
 
 export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
   if (!user) {
@@ -25,6 +26,7 @@ export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
           <Route exact path="/reserve" component={HomePage} />
           <Route exact path="/general" component={HomePage} />
           <Route exact path="/menu" component={ListMenuPage} />
+          <Route path="/menu/:menuId" component={AddCartPage} />
 
           <Redirect from="*" to="/soldier" />
         </Switch>

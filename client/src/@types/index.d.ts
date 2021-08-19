@@ -31,3 +31,12 @@ interface MenuType {
   unit: string;
   price: number;
 }
+
+interface CartType {
+  id: string;
+  user_id: string;
+  completed: boolean;
+  deleted: boolean;
+  bill_id: string;
+  items: ItemType[] | null;
+}
