@@ -30,3 +30,9 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const me = createAsyncThunk('auth/me', async () => {
+  const response = await axios.get<AuthResponse>('/auth/me');
+
+  return response.data;
+});

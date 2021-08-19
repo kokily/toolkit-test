@@ -1,18 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthResponse, login } from '../api/auth';
+import { AuthResponse, login, me } from '../api/auth';
 
 export type AuthState = {
-  me: AuthResponse | null;
+  user: AuthResponse | null;
   loginLoading: boolean;
   loginSuccess: boolean;
   loginError: string | null;
+  meLoading: boolean;
+  meSuccess: boolean;
+  meError: string | null;
 };
 
 const initialState: AuthState = {
-  me: null,
+  user: null,
   loginLoading: false,
   loginSuccess: false,
   loginError: null,
+  meLoading: false,
+  meSuccess: false,
+  meError: null,
 };
 
 const authSlice = createSlice({
@@ -30,7 +36,7 @@ const authSlice = createSlice({
         (state: AuthState, action: PayloadAction<AuthResponse>) => {
           state.loginLoading = false;
           state.loginSuccess = true;
-          state.me = action.payload;
+          state.user = action.payload;
         }
       )
       .addCase(
@@ -39,7 +45,23 @@ const authSlice = createSlice({
           state.loginLoading = false;
           state.loginError = action.payload;
         }
-      ),
+      )
+      .addCase(me.pending, (state: AuthState) => {
+        state.meLoading = true;
+        state.meError = null;
+      })
+      .addCase(
+        me.fulfilled,
+        (state: AuthState, action: PayloadAction<AuthResponse>) => {
+          state.meLoading = false;
+          state.meSuccess = true;
+          state.user = action.payload;
+        }
+      )
+      .addCase(me.rejected, (state: AuthState, action: PayloadAction<any>) => {
+        state.meLoading = false;
+        state.meError = action.payload;
+      }),
 });
 
 export const { reducer } = authSlice;
