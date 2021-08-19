@@ -1,8 +1,6 @@
-import Joi from 'joi';
 import { Context } from 'koa';
 import { getManager, getRepository } from 'typeorm';
 import { Item } from '../../entities/Item';
-import { validateBody } from '../../libs/utils';
 
 export default async function listItems(ctx: Context) {
   type RequestType = {
@@ -12,16 +10,9 @@ export default async function listItems(ctx: Context) {
     native?: string;
   };
 
-  const schema = Joi.object().keys({
-    cursor: Joi.string(),
-    name: Joi.string(),
-    divide: Joi.string(),
-    native: Joi.string(),
-  });
+  const { cursor, name, divide, native }: RequestType = ctx.query;
 
-  if (!validateBody(ctx, schema)) return;
-
-  const { cursor, name, divide, native }: RequestType = ctx.request.body;
+  console.log(cursor, name, divide, native);
 
   try {
     const query = await getManager()

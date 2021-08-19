@@ -8,6 +8,7 @@ const RegisterPage = loadable(() => import('../pages/auth/RegisterPage'));
 
 // Home Routes
 const HomePage = loadable(() => import('../pages/home/HomePage'));
+const ListMenuPage = loadable(() => import('../pages/home/ListMenuPage'));
 
 export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
   if (!user) {
@@ -23,6 +24,8 @@ export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
           <Route exact path="/soldier" component={HomePage} />
           <Route exact path="/reserve" component={HomePage} />
           <Route exact path="/general" component={HomePage} />
+          <Route exact path="/menu" component={ListMenuPage} />
+
           <Redirect from="*" to="/soldier" />
         </Switch>
       )}
