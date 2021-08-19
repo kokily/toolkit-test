@@ -19,3 +19,9 @@ export const addCart = createAsyncThunk(
     }
   }
 );
+
+export const viewCart = createAsyncThunk('cart/viewCart', async () => {
+  const response = await client.get<CartType>('/cart');
+
+  return response.data;
+});

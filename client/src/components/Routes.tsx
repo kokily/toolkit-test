@@ -11,6 +11,9 @@ const HomePage = loadable(() => import('../pages/home/HomePage'));
 const ListMenuPage = loadable(() => import('../pages/home/ListMenuPage'));
 const AddCartPage = loadable(() => import('../pages/home/AddCartPage'));
 
+// Cart Routes
+const CartPage = loadable(() => import('../pages/cart/CartPage'));
+
 export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
   if (!user) {
     localStorage.removeItem('paysys_token');
@@ -27,6 +30,7 @@ export const LoginRoutes = ({ user }: { user: AuthResponse | null }) => {
           <Route exact path="/general" component={HomePage} />
           <Route exact path="/menu" component={ListMenuPage} />
           <Route path="/menu/:menuId" component={AddCartPage} />
+          <Route exact path="/cart" component={CartPage} />
 
           <Redirect from="*" to="/soldier" />
         </Switch>

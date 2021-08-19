@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { addCart } from '../api/cart';
+import { addCart, viewCart } from '../api/cart';
 
 type CartState = {
   cart: CartType | null;
   addCartLoading: boolean;
   addCartSuccess: boolean;
   addCartError: string | null;
+  viewCartLoading: boolean;
+  viewCartSuccess: boolean;
+  viewCartError: string | null;
 };
 
 const initialState: CartState = {
@@ -13,6 +16,9 @@ const initialState: CartState = {
   addCartLoading: false,
   addCartSuccess: false,
   addCartError: null,
+  viewCartLoading: false,
+  viewCartSuccess: false,
+  viewCartError: null,
 };
 
 const cartSlice = createSlice({
